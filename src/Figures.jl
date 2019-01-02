@@ -33,6 +33,9 @@ function close(id::String)
 end
 close(id) = close(string(id))
 
+start(port=8000) = @async Pages.start(port)
+syncstart(port=8000) = Pages.start(port)
+
 function __init__()
     @require PlotlyJS="f0f68f2c-4968-5e81-91da-67840de0976a" include("packages/plotlyjs.jl")
 
@@ -51,8 +54,6 @@ function __init__()
     Get("/plotly.min.js") do request::HTTP.Request
         read(joinpath(@__DIR__,"..","libs","plotly.min.js"),String)
     end
-
-    @async Pages.start()
 
     pushdisplay(Display())
 end

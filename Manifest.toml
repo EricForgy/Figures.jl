@@ -162,9 +162,9 @@ version = "1.0.2"
 
 [[Pages]]
 deps = ["HTTP", "JSON", "PlotlyBase", "Sockets", "Test"]
-path = "C:\\Users\\Eric\\.julia\\dev\\Pages"
+git-tree-sha1 = "332f7eb1ad0b59f130bae643db6e0ea76b1146d2"
 uuid = "7c165e09-dada-5b64-9fdc-39b801c58527"
-version = "0.2.1+"
+version = "0.2.2"
 
 [[Pidfile]]
 deps = ["FileWatching", "Test"]
