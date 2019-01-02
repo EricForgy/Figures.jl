@@ -1,0 +1,11 @@
+name = "Figures"
+uuid = "d77b1bd0-0dd7-11e9-31da-abaf550a3269"
+authors = ["Eric Forgy <Eric.Forgy@coherentasia.com>"]
+version = "0.1.0"
+
+[deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+Pages = "7c165e09-dada-5b64-9fdc-39b801c58527"
+PlotlyJS = "f0f68f2c-4968-5e81-91da-67840de0976a"
+Requires = "ae029012-a4dd-5104-9daa-d747884805df"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
