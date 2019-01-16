@@ -2,76 +2,86 @@
 
 [![][travis-img]][travis-url] [![][appveyor-img]][appveyor-url]
 
-`Figures.jl` is a simple package that creates draggable figures in a browser window to display plots from various plotting packages. It currently works with `PlotlyJS.jl`.
+`Figures.jl` is a simple package that creates draggable figures in a browser window to display plots from various plotting packages. It currently works with `plotly.js`.
 
-### Example
+`Figures.jl` is still in early stages of development, will likely see API changes and is not (yet) intended for use in a production environment.
 
-```julia
-julia> using PlotlyJS, Figures
-julia> Figures.start() # You can enter a port, e.g. Figures.start(3000). Default is 8000.
-```
-
-This launches a server on localhost. Opening the browser to `http://localhost:8000` will show a blank page.
-
-Running
+To obtain the latest tagged release, try:
 
 ```julia
-julia> figure(1)
+pkg> add Figures
 ```
 
-displays a draggable figure in the browser.
-
-![Figure 1](docs/images/figure1.png)
-
-
-Running
+To obtain the latest development branch, try:
 
 ```julia
-julia> function linescatter1()
-    trace1 = PlotlyJS.scatter(;x = 1:4, y = rand(4), mode = "markers")
-    trace2 = PlotlyJS.scatter(;x = 2:5, y = rand(4), mode = "lines")
-    trace3 = PlotlyJS.scatter(;x = 1:4, y = rand(4), mode = "lines+markers")
-    PlotlyJS.plot([trace1, trace2, trace3]) |> display
-end
-julia> linescatter1()
+pkg> add Figures#master
 ```
 
-displays the interactive PlotlyJS chart in the figure.
+## Example
 
-![Plotly Chart 1](docs/images/plotly1.png)
-
-A second figure can be created by running
+The simplest way to see an example is to run
 
 ```julia
-julia> figure(2)
-julia> linescatter1()
+julia> using Figures; Figures.examples(launch=true);
 ```
 
-![Plotly Chart 2](docs/images/plotly2.png)
+This
 
-In addition to creating figures, the `figure` method can make an existing figure active again so that subsequent plots will be rendered on the active figure, e.g.
+1. Starts a server on localhost at the default port 8000.
+2. Opens a new browser tab to <http://localhost:8000/examples/plot.ly.>
+
+If you prefer a different port and do not want to launch a new browser tab (which is better for interactive work, i.e. it is what I do), try
 
 ```julia
-julia> figure(1)
-julia> linescatter1()
+julia> using Figures; Figures.example(port=3000)
 ```
 
-will display a new chart on the existing figure.
+or simply
 
-You can add as many figures to the browser as you like
+```julia
+julia> using Figures; Figures.example() # Uses the default port 8000.
+```
 
-![Plotly Chart 3](docs/images/plotly3.png)
+This starts the local server, but then you need to manually open - or refresh - the url from the browser at <http://localhost:8000/examples/plot.ly>.
+
+You should see a blank page with two buttons as shown below:
+
+![Start](docs/images/example_start.png)
+
+Clicking "Generate Plots", you should see (after a brief warmup the first time) 4 interactive `plotly.js` charts overlaid on top of each other.
+
+![Overlaid](docs/images/example_overlaid.png)
+
+Each chart has a thin strip at the top (seen in white). This strip serves two purposes:
+
+1. Click and drag the strip to move the figure.
+1. Double click the strip to close the figure.
+
+![Layout](docs/images/example_layout.png)
+
+Clicking "Generate Plots" again, will update two of the four charts with random data.
+
+![Update](docs/images/example_update.png)
+
+The usual `plotly.js` interactivity is also available:
+
+![Interact](docs/images/example_interact.png)
+
+Next, you can open a second browser tab to the same url <http://localhost:8000/examples/plot.ly>. It is best if the two pages are open side by side.
+
+Clicking "Generate Plots" will only update the charts in the given window where the button was clicked. "Broadcast Plots" will update the charts on all connected pages.
 
 To remove figures, there is the method
 
 ```julia
-julia> closeall()
+julia> Figures.closeall()
 ```
 
 which closes all figures and
 
 ```julia
-julia> close(1)
+julia> Figures.close("Plot4")
 ```
 
 which closes the specified figure.
