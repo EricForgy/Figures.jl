@@ -2,7 +2,7 @@ module Plotly
 
 using ..Figures, ..Pages, ..JSON
 
-export Scatter, Layout, Config
+export Scatter, Layout, Config, newPlot
 export Font, Title, ColorBar, Gradient, Marker, Line, Error, Margin, Axis
 
 include("utils.jl"); using .Utilities

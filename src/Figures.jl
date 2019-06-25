@@ -4,11 +4,11 @@ using Pages, JSON
 
 export figure, Plotly, Style
 
-struct Display <: AbstractDisplay end
-
-include("packages/plotly/plotly.jl"); using .Plotly
+include("packages/plotly/plotly.jl")
 
 import .Plotly: newPlot
+
+struct Display <: AbstractDisplay end
 
 const current = Ref{String}("")
 
